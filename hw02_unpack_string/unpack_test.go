@@ -21,6 +21,11 @@ func TestUnpack(t *testing.T) {
 		{input: `qwe\45`, expected: `qwe44444`},
 		{input: `qwe\\5`, expected: `qwe\\\\\`},
 		{input: `qwe\\\3`, expected: `qwe\3`},
+		// add tests nonASCII and emoji
+		{input: "прив4ет", expected: "приввввет"},
+		{input: `пр\4иsве0т`, expected: `пр4иsвт`},
+		{input: "♫♫♫0", expected: "♫♫"},
+		{input: "🙂9", expected: "🙂🙂🙂🙂🙂🙂🙂🙂🙂"},
 	}
 
 	for _, tc := range tests {

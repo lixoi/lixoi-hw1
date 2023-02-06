@@ -1,4 +1,4 @@
-module github.com/lixoi/lixoi-hw1
+module github.com/lixoi/lixoi-hw1/hw02_unpack_string
 
 go 1.19
 
