@@ -10,9 +10,7 @@ const (
 	reTemplateWord = `([,!'.":]+)|(-$)`
 )
 
-var (
-	reWord = regexp.MustCompile(reTemplateWord)
-)
+var reWord = regexp.MustCompile(reTemplateWord)
 
 // Words ...
 type Words struct {
@@ -47,7 +45,7 @@ func Top10(text string) []string {
 		if wSlices[i].frequency > wSlices[j].frequency {
 			return true
 		}
-		return -1 == strings.Compare(wSlices[i].word, wSlices[j].word)
+		return strings.Compare(wSlices[i].word, wSlices[j].word) == -1
 	})
 	// get first 10 sorted words
 	result := make([]string, 0, 10)
