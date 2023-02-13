@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	reTemplateWord = `([,!'.":]+)|(-$)`
+	reTemplateWord = `([(),!'.":]+)|(-$)`
 )
 
 var reWord = regexp.MustCompile(reTemplateWord)
@@ -23,7 +23,7 @@ func Top10(text string) []string {
 	// split text
 	textSplit := strings.Fields(text)
 	if len(textSplit) == 1 {
-		return nil
+		return textSplit
 	}
 	// count words in text
 	mapWords := make(map[string]int, len(textSplit))
