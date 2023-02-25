@@ -34,7 +34,7 @@ func (lc *lruCache) Set(key Key, value interface{}) bool {
 	}
 	lc.mu.Lock()
 	defer lc.mu.Unlock()
-	if v, ok := lc.items[key]; ok == true {
+	if v, ok := lc.items[key]; ok {
 		v.Value = value
 		lc.queue.MoveToFront(v)
 		return true
@@ -60,7 +60,7 @@ func (lc *lruCache) Get(key Key) (interface{}, bool) {
 	}
 	lc.mu.Lock()
 	defer lc.mu.Unlock()
-	if v, ok := lc.items[key]; ok == true {
+	if v, ok := lc.items[key]; ok {
 		lc.queue.MoveToFront(v)
 		return v.Value, ok
 	}
