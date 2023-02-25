@@ -77,13 +77,10 @@ func TestCache(t *testing.T) {
 		c.Set("7", nil)
 		_, ok = c.Get("7")
 		require.False(t, ok)
-		// Write me
 	})
 }
 
 func TestCacheMultithreading(t *testing.T) {
-	//t.Skip() // Remove me if task with asterisk completed.
-
 	c := NewCache(10)
 	wg := &sync.WaitGroup{}
 	wg.Add(2)
