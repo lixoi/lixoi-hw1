@@ -19,9 +19,9 @@ type ListItem struct {
 }
 
 type list struct {
-	size     int
-	head     *ListItem
-	finitude *ListItem
+	size int
+	head *ListItem
+	tail *ListItem
 }
 
 func (ll *list) Len() int {
@@ -29,7 +29,7 @@ func (ll *list) Len() int {
 }
 
 func (ll *list) Back() *ListItem {
-	return ll.finitude
+	return ll.tail
 }
 
 func (ll *list) Front() *ListItem {
@@ -38,19 +38,19 @@ func (ll *list) Front() *ListItem {
 
 func (ll *list) PushBack(v interface{}) *ListItem {
 	if v == nil {
-		return ll.finitude
+		return ll.tail
 	}
-	ll.finitude = &ListItem{v, nil, ll.finitude}
-	if ll.finitude.Prev != nil {
-		ll.finitude.Prev.Next = ll.finitude
+	ll.tail = &ListItem{v, nil, ll.tail}
+	if ll.tail.Prev != nil {
+		ll.tail.Prev.Next = ll.tail
 	}
 
 	if ll.head == nil {
-		ll.head = ll.finitude
+		ll.head = ll.tail
 	}
 	ll.size++
 
-	return ll.finitude
+	return ll.tail
 }
 
 func (ll *list) PushFront(v interface{}) *ListItem {
@@ -61,8 +61,8 @@ func (ll *list) PushFront(v interface{}) *ListItem {
 	if ll.head.Next != nil {
 		ll.head.Next.Prev = ll.head
 	}
-	if ll.finitude == nil {
-		ll.finitude = ll.head
+	if ll.tail == nil {
+		ll.tail = ll.head
 	}
 	ll.size++
 
@@ -79,8 +79,8 @@ func (ll *list) Remove(i *ListItem) {
 		return
 	}
 	if i.Next == nil {
-		ll.finitude = ll.finitude.Prev
-		ll.finitude.Next = nil
+		ll.tail = ll.tail.Prev
+		ll.tail.Next = nil
 		return
 	}
 	if i.Prev == nil {
@@ -102,8 +102,8 @@ func (ll *list) MoveToFront(i *ListItem) {
 		return
 	}
 	if i.Next == nil {
-		ll.finitude = ll.finitude.Prev
-		ll.finitude.Next = nil
+		ll.tail = ll.tail.Prev
+		ll.tail.Next = nil
 		ll.setFront(i)
 		return
 	}
