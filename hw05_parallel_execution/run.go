@@ -28,7 +28,7 @@ func Run(tasks []Task, n, m int) error {
 			go func(i int, c chan result) {
 				defer func() {
 					wg.Done()
-					numGoroutines--
+					// numGoroutines--
 				}()
 				err := tasks[i]()
 				res := result{}
